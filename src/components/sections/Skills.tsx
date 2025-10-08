@@ -24,9 +24,9 @@ const Skills: React.FC = () => {
                 {items.map(skill => {
                   const Icon = iconMap[skill] || Shapes; // Fallback to a generic icon
                   return (
-                    <div key={skill} className="flex items-center bg-gray-200 p-2 rounded-lg">
-                      <Icon className="w-5 h-5 mr-2 text-gray-700" />
-                      <span className="text-gray-800 text-sm font-medium">
+                    <div key={skill} className="flex items-center bg-zinc-600 text-white px-3 py-1 rounded-full">
+                      <Icon className="w-5 h-5 mr-2 text-white" />
+                      <span className="text-white text-sm font-medium">
                         {skill}
                       </span>
                     </div>
