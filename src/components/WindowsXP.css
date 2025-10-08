@@ -2,7 +2,7 @@
   position: relative;
   width: 90vw;
   max-width: 900px;
-  height: 70vw;
+  height: 90vh; /* Use 90% of viewport height to create padding */
   max-height: 700px;
 }
 
