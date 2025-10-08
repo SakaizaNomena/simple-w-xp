@@ -48,15 +48,18 @@ const Experience: React.FC = () => {
                   <span>{exp.entreprise} | {exp.periode}</span>
                 </div>
                 <p className="mt-2">{exp.description}</p>
-                <div className="mt-4 flex flex-wrap ml-6">
-                  Technologie utilisée :
-                  {exp.technologies.map(tech => {
-                    // const Icon = iconMap[tech] || Shapes;
+                <div className="mt-4 flex flex-wrap items-center">
+                  Tech used:
+                  {exp.technologies.map((tech, index) => {
+                    const Icon = iconMap[tech] || Shapes;
                     return (
-                      <div key={tech} className="flex items-center bg-zinc-600 text-white px-2 py-1 rounded-full text-xs font-medium m-1">
-                        {/* <Icon className="w-3 h-3 mr-1" /> */}
-                        <span className='p-2 bg-zinc-200 rounded-full'>{tech}</span>
-                      </div>
+                      <React.Fragment key={tech}>
+                        <div className="flex items-center bg-zinc-600 text-white px-2 py-1 rounded-full text-xs font-medium m-1">
+                          <Icon className="w-3 h-3 mr-1" />
+                          <span>{tech}</span>
+                        </div>
+                        {index < exp.technologies.length - 1 && <span className="mx-1">-</span>}
+                      </React.Fragment>
                     );
                   })} 
                 </div>

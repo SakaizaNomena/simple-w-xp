@@ -20,18 +20,21 @@ const Skills: React.FC = () => {
           {Object.entries(skills).map(([category, items]) => (
             <div key={category} className="bg-white rounded-lg shadow-md p-6">
               <h3 className="text-xl font-bold mb-4 text-gray-800">{category}</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {items.map(skill => {
+              <div className="flex flex-wrap items-center gap-y-2">
+                {items.map((skill, index) => {
                   const Icon = iconMap[skill] || Shapes; // Fallback to a generic icon
                   return (
-                    <div key={skill} className="flex items-center bg-zinc-600 text-white px-3 py-1 rounded-full">
-                      <Icon className="w-5 h-5 mr-2 text-white" />
-                      <span className="text-white text-sm font-medium">
-                        {skill}
-                      </span>
-                    </div>
+                    <React.Fragment key={skill}>
+                      <div className="flex items-center bg-zinc-600 text-white px-3 py-1 rounded-full">
+                        <Icon className="w-5 h-5 mr-2 text-white" />
+                        <span className="text-white text-sm font-medium">
+                          {skill}
+                        </span>
+                      </div>
+                      {index < items.length - 1 && <span className="mx-1">-</span>}
+                    </React.Fragment>
                   );
-                })}
+                })} 
               </div>
             </div>
           ))}
