@@ -1,27 +1,70 @@
-import React, { useState } from 'react';
-import { User, Code, Briefcase, GraduationCap } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { User, Code, Briefcase, GraduationCap, Contact as ContactIcon, Send } from 'lucide-react';
 import './WindowsXP.css';
 import Skills from './sections/Skills';
 import Experience from './sections/Experience';
 import Education from './sections/Education';
+import Contact from './sections/Contact';
+import ContactForm from './sections/ContactForm';
+import StartMenu from './StartMenu';
+
+const viewItems = [
+  { id: 'about', name: 'À Propos', icon: User },
+  { id: 'skills', name: 'Compétences', icon: Code },
+  { id: 'experience', name: 'Expériences', icon: Briefcase },
+  { id: 'education', name: 'Formations', icon: GraduationCap },
+  { id: 'contact', name: 'Contact', icon: ContactIcon },
+  { id: 'contact-form', name: 'Me Contacter', icon: Send },
+] as const;
 
 const WindowsXP: React.FC = () => {
   const [isClosed, setClosed] = useState(false);
   const [isMinimized, setMinimized] = useState(false);
   const [isMaximized, setMaximized] = useState(false);
-  const [view, setView] = useState<'about' | 'skills' | 'experience' | 'education'>('about');
+  const [view, setView] = useState<typeof viewItems[number]['id']>('about');
+  const [startMenuOpen, setStartMenuOpen] = useState(false);
+  const [isShuttingDown, setIsShuttingDown] = useState(false);
+  const [shutdownComplete, setShutdownComplete] = useState(false);
+  const startMenuRef = useRef<HTMLDivElement>(null);
+  const startButtonRef = useRef<HTMLDivElement>(null);
 
   const handleSetView = (newView: typeof view) => {
     setView(newView);
     setClosed(false);
     setMinimized(false);
+    setStartMenuOpen(false);
   };
+
+  const handleShutdown = () => {
+    setStartMenuOpen(false);
+    setIsShuttingDown(true);
+    setTimeout(() => {
+      setShutdownComplete(true);
+    }, 3000);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        startMenuRef.current && !startMenuRef.current.contains(event.target as Node) &&
+        startButtonRef.current && !startButtonRef.current.contains(event.target as Node)
+      ) {
+        setStartMenuOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const renderContent = () => {
     switch (view) {
       case 'skills': return <Skills />;
       case 'experience': return <Experience />;
       case 'education': return <Education />;
+      case 'contact': return <Contact />;
+      case 'contact-form': return <ContactForm />;
       case 'about':
       default:
         return (
@@ -38,25 +81,35 @@ const WindowsXP: React.FC = () => {
   };
 
   const getTitle = () => {
-    switch (view) {
-      case 'skills': return 'Compétences';
-      case 'experience': return 'Expériences';
-      case 'education': return 'Formations';
-      default: return 'À Propos de Moi';
-    }
+    return viewItems.find(item => item.id === view)?.name || 'À Propos de Moi';
   };
 
+  if (shutdownComplete) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <h1 className="text-4xl font-mono">Merci pour votre visite !</h1>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-[#3A6EA5] flex items-center justify-center">
+    <div className="min-h-screen bg-[#3A6EA5] flex items-center justify-center overflow-hidden">
+      {isShuttingDown && (
+        <div className="fixed inset-0 bg-blue-900 text-white flex flex-col items-center justify-center z-50">
+          <p className="text-lg">Fermeture de Windows en cours...</p>
+        </div>
+      )}
       <div className="desktop-scene">
         <div className="monitor">
           <div className="screen">
             <div className="wallpaper"></div>
             <div className="desktop-icons">
-              <div className="icon" onClick={() => handleSetView('about')}><User size={32} /><span>À Propos</span></div>
-              <div className="icon" onClick={() => handleSetView('skills')}><Code size={32} /><span>Compétences</span></div>
-              <div className="icon" onClick={() => handleSetView('experience')}><Briefcase size={32} /><span>Expériences</span></div>
-              <div className="icon" onClick={() => handleSetView('education')}><GraduationCap size={32} /><span>Formations</span></div>
+              {viewItems.map(item => (
+                <div key={item.id} className="icon" onClick={() => handleSetView(item.id)}>
+                  <item.icon size={32} />
+                  <span>{item.name}</span>
+                </div>
+              ))}
             </div>
             {!isClosed && (
               <div className={`window ${isMaximized ? 'maximized' : ''} ${isMinimized ? 'minimized' : ''}`}>
@@ -72,7 +125,7 @@ const WindowsXP: React.FC = () => {
               </div>
             )}
             <div className="taskbar">
-              <div className="start-button">
+              <div className="start-button" ref={startButtonRef} onClick={() => setStartMenuOpen(!startMenuOpen)}>
                 <svg width="15" height="15" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg" style={{ marginRight: '4px' }}>
                   <rect fill="#f34f1c" x="0" y="0" width="7" height="7"/>
                   <rect fill="#85c222" x="8" y="0" width="7" height="7"/>
@@ -83,6 +136,16 @@ const WindowsXP: React.FC = () => {
               </div>
               {view && !isClosed && isMinimized && (
                 <div className="taskbar-tab" onClick={() => setMinimized(false)}>{getTitle()}</div>
+              )}
+              {startMenuOpen && (
+                <div ref={startMenuRef}>
+                  <StartMenu 
+                    //@ts-ignore
+                    views={viewItems}
+                    onSelectView={handleSetView}
+                    onShutdown={handleShutdown}
+                  />
+                </div>
               )}
             </div>
           </div>

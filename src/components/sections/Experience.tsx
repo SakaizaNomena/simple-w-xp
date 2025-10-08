@@ -1,5 +1,6 @@
 import React from 'react';
-import { Briefcase, Building2 } from 'lucide-react';
+import { Briefcase, Building2, Shapes } from 'lucide-react';
+import { iconMap } from '../iconMap';
 
 const experiences = [
   {
@@ -37,25 +38,26 @@ const Experience: React.FC = () => {
     <section className="py-12 bg-white">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-8">Expériences Professionnelles</h2>
-        <div className="relative border-l-4 border-gray-200">
+        <div className="relative">
           {experiences.map((exp, index) => (
             <div key={index} className="mb-8 ml-12">
-              <div className="absolute -left-5 mt-1 w-10 h-10 bg-blue-600 text-white rounded-full flex items-center justify-center border-4 border-white">
-                <Briefcase size={20} />
-              </div>
               <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold">{exp.poste}</h3>
+                <h3 className="text-xl font-bold border-b-2 border-gray-400 pb-1">{exp.poste}</h3>
                 <div className="flex items-center text-gray-600 font-semibold my-1">
                   <Building2 className="w-4 h-4 mr-2" />
                   <span>{exp.entreprise} | {exp.periode}</span>
                 </div>
                 <p className="mt-2">{exp.description}</p>
-                <div className="mt-4 flex flex-wrap gap-2">
-                  {exp.technologies.map(tech => (
-                    <span key={tech} className="bg-blue-200 text-blue-800 px-2 py-1 rounded-full text-xs font-medium">
-                      {tech}
-                    </span>
-                  ))}
+                <div className="mt-4 flex flex-wrap ml-6">
+                  {exp.technologies.map(tech => {
+                    const Icon = iconMap[tech] || Shapes;
+                    return (
+                      <div key={tech} className="flex items-center bg-blue-200 text-blue-800 px-6 py-1 rounded-full text-xs font-medium m-1">
+                        <Icon className="w-3 h-3 mr-1" />
+                        <span>{tech}</span>
+                      </div>
+                    );
+                  })} 
                 </div>
               </div>
             </div>
