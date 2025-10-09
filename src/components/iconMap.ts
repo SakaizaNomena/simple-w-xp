@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Code, Database, Server, Wrench, Shapes, GitMerge, Box, FileCode, Terminal, Wind, 
+  Code, Database, Server, Wrench, GitMerge, Box, FileCode, Terminal, Wind, 
   Atom, Library, DatabaseZap, Cpu, Bot, BrainCircuit, MessageCircle, CreditCard, Phone, 
   ServerCog, PenTool, Network
 } from 'lucide-react';

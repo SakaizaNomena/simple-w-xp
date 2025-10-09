@@ -1,5 +1,5 @@
 import React from 'react';
-import { Briefcase, Building2, Shapes } from 'lucide-react';
+import { Building2, Shapes } from 'lucide-react';
 import { iconMap } from '../iconMap';
 
 const experiences = [
