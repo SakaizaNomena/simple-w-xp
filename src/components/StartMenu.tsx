@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Code, Briefcase, GraduationCap, Contact, Send, Power } from 'lucide-react';
+import { User, Power } from 'lucide-react';
 
 // Define the type for a view item
 interface ViewItem {
@@ -47,7 +47,7 @@ const StartMenu: React.FC<StartMenuProps> = ({ onSelectView, onShutdown, views }
           bottom: 30px; /* Height of the taskbar */
           left: 0;
           width: 400px;
-          height: 500px;
+          height: auto;
           background: linear-gradient(to bottom, #0058C6, #3C87E8);
           border: 2px solid #0058C6;
           border-radius: 10px 10px 0 0;
@@ -92,6 +92,7 @@ const StartMenu: React.FC<StartMenuProps> = ({ onSelectView, onShutdown, views }
           padding: 8px;
           display: flex;
           justify-content: flex-end;
+          padding-top: 15px;
         }
         .shutdown-button {
           display: flex;
