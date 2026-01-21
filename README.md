@@ -1,73 +1,45 @@
-# React + TypeScript + Vite
+<h1 align="center">Windows XP Clone</h1>
+<p align="center">
+    Un portfolio interactif au format Windows XP, construit avec <a href="https://nextjs.org">Next.js</a> et <a href="https://tailwindcss.com">Tailwind CSS</a>.
+</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+## 📋 À propos
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Ce projet est un clone nostalgique de Windows XP qui sert de portfolio personnel. Recréant l'interface emblématique du système d'exploitation, il offre une expérience unique et interactive pour présenter mes projets et compétences.
 
-## React Compiler
+**Note :** Ce projet est un passe-temps développé pendant mon temps libre. De nouvelles fonctionnalités seront ajoutées progressivement !
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🚀 Technologies utilisées
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Next.js** - Framework React pour le rendu côté serveur
+- **Tailwind CSS** - Framework CSS utilitaire pour le styling
+- **React** - Bibliothèque JavaScript pour l'interface utilisateur
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ Fonctionnalités actuelles
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [x] Interface Windows XP authentique
+- [x] Menu Démarrer interactif
+- [x] Barre des tâches fonctionnelle
+- [x] Fenêtres redimensionnables et déplaçables
+- [x] Design responsive
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🔮 Fonctionnalités à venir
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- [ ] Applications intégrées (Bloc-notes, Paint, etc.)
+- [ ] Système de fichiers simulé
+- [ ] Mode sombre
+- [ ] Sons système Windows XP
+- [ ] Économiseur d'écran
+- [ ] Personnalisation du bureau
+- [ ] Easter eggs nostalgiques
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🛠️ Installation
+```bash
