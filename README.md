@@ -44,7 +44,7 @@ Ce projet est un clone nostalgique de Windows XP qui sert de portfolio personnel
 ## 🛠️ Installation
 ```bash
 # Cloner le repository
-git clone https://github.com/SakaizaNomena/windows-xp-clone.git
+git clone https://github.com/SakaizaNomena/simple-w-xp.git
 
 # Naviguer dans le dossier
 cd windows-xp-clone
